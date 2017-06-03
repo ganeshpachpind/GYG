@@ -1,7 +1,9 @@
-package interview.gyg;
+package interview.gyg.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
+import interview.gyg.R;
 
 public class ReviewActivity extends AppCompatActivity {
 
@@ -10,4 +12,6 @@ public class ReviewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review);
     }
+
+
 }

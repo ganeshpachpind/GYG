@@ -47,8 +47,8 @@ public class ReviewRepositoryTest extends RxBaseTest {
         when(restAPIFactory.getReviewService()).thenReturn(reviewService);
         reviewRepository = new ReviewRepository(restAPIFactory);
         reviewList = Arrays.asList(
-                new Review(10),
-                new Review(10)
+                new Review(10, "", "message", "author", false),
+                new Review(10, "", "message", "author", false)
         );
     }
 

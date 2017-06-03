@@ -5,7 +5,7 @@ import java.util.List;
 
 import interview.gyg.api.RestAPIFactory;
 import interview.gyg.model.Review;
-import rx.Subscriber;
+import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -18,12 +18,12 @@ public class ReviewRepository {
         this.restAPIFactory = restAPIFactory;
     }
 
-    public void getReviews(Subscriber<List<Review>> subscriber) {
+    public void getReviews(Observer<List<Review>> observer) {
         Subscription subscription = restAPIFactory.getReviewService()
                 .getReviewList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(subscriber);
+                .subscribe(observer);
     }
 
 }

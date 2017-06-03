@@ -4,6 +4,10 @@ apply plugin: 'realm-android'
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
+    
+    dataBinding {
+        enabled = true
+    }
 
     defaultConfig {
         jackOptions {

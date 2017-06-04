@@ -3,6 +3,7 @@ package interview.gyg.model;
 
 import interview.gyg.activities.ReviewListView;
 import interview.gyg.repository.ReviewRepository;
+import retrofit2.HttpException;
 import rx.Observer;
 
 public class ReviewListViewModel implements Observer<ReviewListResponse> {
@@ -25,9 +26,13 @@ public class ReviewListViewModel implements Observer<ReviewListResponse> {
     }
 
     @Override
-    public void onError(Throwable e) {
+    public void onError(Throwable throwable) {
         reviewListView.hideProgressBar();
-        reviewListView.setErrorMessage();
+        if (throwable instanceof HttpException) {
+            reviewListView.showErrorMessage();
+        } else {
+            reviewListView.showNetworkErrorMessage();
+        }
     }
 
     @Override

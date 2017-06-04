@@ -5,9 +5,11 @@ import interview.gyg.model.ReviewListResponse;
 
 public interface ReviewListView {
     void updateReviewList(ReviewListResponse reviewListResponse);
-    void setErrorMessage();
+    void showErrorMessage();
 
     void showProgressBar();
 
     void hideProgressBar();
+
+    void showNetworkErrorMessage();
 }

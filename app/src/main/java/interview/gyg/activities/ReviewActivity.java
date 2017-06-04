@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -65,11 +66,6 @@ public class ReviewActivity extends AppCompatActivity implements ReviewListView 
     }
 
     @Override
-    public void setErrorMessage() {
-
-    }
-
-    @Override
     public void showProgressBar() {
         isLoading = true;
         progressBar.setVisibility(View.VISIBLE);
@@ -79,5 +75,15 @@ public class ReviewActivity extends AppCompatActivity implements ReviewListView 
     public void hideProgressBar() {
         isLoading = false;
         progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showNetworkErrorMessage() {
+        Toast.makeText(this, R.string.check_internet, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showErrorMessage() {
+        Toast.makeText(this, R.string.something_went_wrong, Toast.LENGTH_LONG).show();
     }
 }

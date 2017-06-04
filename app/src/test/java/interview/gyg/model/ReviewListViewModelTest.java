@@ -11,8 +11,9 @@ import java.util.List;
 
 import interview.gyg.activities.ReviewListView;
 import interview.gyg.repository.ReviewRepository;
-
+import retrofit2.HttpException;
 import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
@@ -52,15 +53,25 @@ public class ReviewListViewModelTest {
 
         verify(reviewListView).updateReviewList(reviewListResponse);
         verify(reviewListView, never()).hideProgressBar();
-        verify(reviewListView, never()).setErrorMessage();
+        verify(reviewListView, never()).showErrorMessage();
     }
 
     @Test
-    public void shouldSetErrorMessageOnFailureOfReviewListFetch() throws Exception {
+    public void shouldShowErrorMessageOnHttpFailureOfReviewListFetch() throws Exception {
+
+        reviewListViewModel.onError(mock(HttpException.class));
+
+        verify(reviewListView).showErrorMessage();
+        verify(reviewListView).hideProgressBar();
+        verify(reviewListView, never()).updateReviewList(any(ReviewListResponse.class));
+    }
+
+    @Test
+    public void shouldShowNetworkErrorMessageWhenNoInternetConnection() throws Exception {
 
         reviewListViewModel.onError(new Exception());
 
-        verify(reviewListView).setErrorMessage();
+        verify(reviewListView).showNetworkErrorMessage();
         verify(reviewListView).hideProgressBar();
         verify(reviewListView, never()).updateReviewList(any(ReviewListResponse.class));
     }
@@ -78,6 +89,6 @@ public class ReviewListViewModelTest {
         reviewListViewModel.onCompleted();
 
         verify(reviewListView).hideProgressBar();
-        verify(reviewListView, never()).setErrorMessage();
+        verify(reviewListView, never()).showErrorMessage();
     }
 }

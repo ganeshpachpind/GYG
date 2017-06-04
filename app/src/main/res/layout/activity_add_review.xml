@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -9,110 +8,124 @@
             type="interview.gyg.model.AddReviewViewModel" />
     </data>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:theme="@style/AppTheme.NoActionBar">
 
 
-        <TextView
-            style="@style/titleText"
+            <TextView
+                style="@style/titleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="6dp"
+                android:text="@string/add_review"
+                android:textColor="@color/black" />
+
+            <TextView
+                style="@style/messageText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:paddingLeft="12dp"
+                android:text="@string/rating"
+                android:textColor="@color/black" />
+
+            <RatingBar
+
+                android:id="@+id/overall_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:numStars="5"
+                android:rating="@={(float)addReviewViewModel.review.rating}"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+                android:transformPivotX="1dp"
+                android:transformPivotY="1dp" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp">
+
+                <EditText
+                    android:id="@+id/signup_input_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/title"
+                    android:text="@={addReviewViewModel.review.title}" />
+
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_country"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp">
+
+                <EditText
+                    android:id="@+id/country"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/country"
+                    android:text="@={addReviewViewModel.review.country}" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/anything_else_to_say"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/edittext_modified_states"
+                android:inputType="textCapSentences|textMultiLine"
+                android:minLines="2"
+                android:scrollHorizontally="false"
+                android:singleLine="false"
+                android:text="@={addReviewViewModel.review.message}"
+                android:textColor="@color/black" />
+
+
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/btn_background_rectangle"
+                android:onClick="@{() -> addReviewViewModel.onSubmitReviewClicked()}"
+                android:text="@string/submit"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="6dp"
-            android:text="@string/add_review"
-            android:textColor="@color/black" />
-
-        <TextView
-            style="@style/messageText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:paddingLeft="12dp"
-            android:text="@string/rating"
-            android:textColor="@color/black" />
-
-        <RatingBar
-
-            android:id="@+id/overall_rating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:numStars="5"
-            android:rating="@={(float)addReviewViewModel.review.rating}"
-            android:scaleX="0.8"
-            android:scaleY="0.8"
-            android:transformPivotX="1dp"
-            android:transformPivotY="1dp" />
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/input_layout_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dp">
-
-            <EditText
-                android:id="@+id/signup_input_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/title"
-                android:text="@={addReviewViewModel.review.title}" />
-
-        </android.support.design.widget.TextInputLayout>
+            android:visibility="gone" />
+    </FrameLayout>
 
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/input_layout_country"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dp">
-
-            <EditText
-                android:id="@+id/country"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/country"
-                android:text="@={addReviewViewModel.review.country}" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/anything_else_to_say"
-            android:textColor="@color/black" />
-
-        <EditText
-            android:id="@+id/message"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/edittext_modified_states"
-            android:inputType="textCapSentences|textMultiLine"
-            android:minLines="2"
-            android:scrollHorizontally="false"
-            android:singleLine="false"
-            android:text="@={addReviewViewModel.review.message}"
-            android:textColor="@color/black" />
-
-
-        <Button
-            android:id="@+id/submit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/btn_background_rectangle"
-            android:onClick="@{() -> addReviewViewModel.onSubmitReviewClicked()}"
-            android:text="@string/submit"
-            android:textColor="@android:color/white" />
-    </LinearLayout>
 </layout>

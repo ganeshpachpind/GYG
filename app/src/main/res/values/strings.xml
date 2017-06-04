@@ -13,4 +13,5 @@
     <string name="rating">Rating</string>
     <string name="anything_else_to_say">Anything else you would like to say</string>
     <string name="submit">Submit</string>
+    <string name="thank_you">Thank You for submitting review</string>
 </resources>

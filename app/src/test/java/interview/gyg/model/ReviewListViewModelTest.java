@@ -41,11 +41,11 @@ public class ReviewListViewModelTest {
     public void shouldSetListAdapterOnSuccessfulReviewListFetch() throws Exception {
 
         List<Review> reviews = Arrays.asList(
-                new Review(10, "", "message", "author", false),
+                new Review(10f, "", "message", "author", false),
                 new Review(10, "", "message", "author", false)
         );
 
-        reviewListViewModel.onNext(reviews);
+        reviewListViewModel.onNext(new ReviewListResponse(true, 200, reviews));
 
         verify(reviewListView).setListAdapter(reviews);
     }

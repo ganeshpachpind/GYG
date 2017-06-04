@@ -1,14 +1,20 @@
 package interview.gyg.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Review {
-    private int rating;
+    private double rating;
     private String title;
     private String message;
     private String author;
     private boolean foreignLanguage;
 
-    public Review(int rating, String title, String message, String author, boolean foreignLanguage) {
+    public Review() {
+    }
+
+    public Review(double rating, String title, String message, String author, boolean foreignLanguage) {
         this.rating = rating;
         this.title = title;
         this.message = message;
@@ -16,11 +22,11 @@ public class Review {
         this.foreignLanguage = foreignLanguage;
     }
 
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 

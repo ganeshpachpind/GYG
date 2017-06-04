@@ -22,15 +22,18 @@ public class ReviewActivity extends AppCompatActivity implements ReviewListView 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_review);
+
         ReviewRepository reviewRepository = new ReviewRepository(new RestAPIFactory());
         ReviewListViewModel reviewListViewModel = new ReviewListViewModel(reviewRepository, this);
+
         binding.setReviewListViewModel(reviewListViewModel);
-        binding.reviewList.setLayoutManager(new LinearLayoutManager(this));
+        reviewListViewModel.getReviewList();
     }
 
     @Override
     public void setListAdapter(List<Review> reviews) {
         binding.reviewList.setAdapter(new ReviewAdapter(reviews));
+        binding.reviewList.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override

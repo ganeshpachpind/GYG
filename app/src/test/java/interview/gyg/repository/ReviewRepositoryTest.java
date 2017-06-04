@@ -16,6 +16,7 @@ import interview.gyg.api.RestAPIFactory;
 import interview.gyg.api.ReviewService;
 import interview.gyg.helper.RxBaseTest;
 import interview.gyg.model.Review;
+import interview.gyg.model.ReviewListResponse;
 import rx.Observable;
 import rx.observers.TestSubscriber;
 
@@ -26,7 +27,7 @@ import static org.mockito.Mockito.when;
 public class ReviewRepositoryTest extends RxBaseTest {
 
     @Captor
-    ArgumentCaptor<List<Review>> argumentCaptor;
+    ArgumentCaptor<ReviewListResponse> argumentCaptor;
 
     @Mock
     private RestAPIFactory restAPIFactory;
@@ -37,12 +38,14 @@ public class ReviewRepositoryTest extends RxBaseTest {
 
     private ReviewRepository reviewRepository;
     private List<Review> reviewList;
-    private TestSubscriber<List<Review>> testSubscriber;
+    private TestSubscriber<ReviewListResponse> testSubscriber;
+    ReviewListResponse reviewListResponse;
 
     @Override
     @Before
     public void setUp() throws Exception {
         super.setUp();
+        reviewListResponse = new ReviewListResponse(true, 300, reviewList);
         testSubscriber = TestSubscriber.create();
         when(restAPIFactory.getReviewService()).thenReturn(reviewService);
         reviewRepository = new ReviewRepository(restAPIFactory);
@@ -54,7 +57,7 @@ public class ReviewRepositoryTest extends RxBaseTest {
 
     @Test
     public void shouldFetchAllReviewsFromServer() throws Exception {
-        when(reviewService.getReviewList()).thenReturn(Observable.just(reviewList));
+        when(reviewService.getReviewList()).thenReturn(Observable.just(reviewListResponse));
         reviewRepository.getReviews(testSubscriber);
 
         verify(restAPIFactory).getReviewService();
@@ -62,12 +65,12 @@ public class ReviewRepositoryTest extends RxBaseTest {
 
         testSubscriber.assertNoErrors();
         testSubscriber.assertCompleted();
-        testSubscriber.assertReceivedOnNext(Collections.singletonList(reviewList));
+        testSubscriber.assertReceivedOnNext(Collections.singletonList(reviewListResponse));
     }
 
     @Test
     public void shouldThrowErrorWhenFetchingReviewFromServerFailed() throws Exception {
-        when(reviewService.getReviewList()).thenReturn(Observable.<List<Review>>error(new Exception()));
+        when(reviewService.getReviewList()).thenReturn(Observable.<ReviewListResponse>error(new Exception()));
         reviewRepository.getReviews(testSubscriber);
 
         testSubscriber.assertError(Exception.class);

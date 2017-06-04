@@ -1,13 +1,11 @@
 package interview.gyg.model;
 
 
-import java.util.List;
-
 import interview.gyg.activities.ReviewListView;
 import interview.gyg.repository.ReviewRepository;
 import rx.Observer;
 
-public class ReviewListViewModel implements Observer<List<Review>> {
+public class ReviewListViewModel implements Observer<ReviewListResponse> {
     private ReviewRepository reviewRepository;
     private ReviewListView reviewListView;
 
@@ -31,7 +29,7 @@ public class ReviewListViewModel implements Observer<List<Review>> {
     }
 
     @Override
-    public void onNext(List<Review> reviews) {
-       reviewListView.setListAdapter(reviews);
+    public void onNext(ReviewListResponse reviewListResponse) {
+        reviewListView.setListAdapter(reviewListResponse.getReviews());
     }
 }

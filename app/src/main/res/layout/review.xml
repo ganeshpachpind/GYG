@@ -10,30 +10,54 @@
     </data>
 
     <LinearLayout
-        android:padding="10dp"
+        android:paddingTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
-            tools:text ="Title"
+            android:paddingBottom="4dp"
             style="@style/titleText"
+            android:layout_marginBottom="2dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{review.title}" />
+            android:text="@{review.title}"
+            tools:text="Title" />
+
+        <RatingBar
+            android:id="@+id/rating"
+            android:paddingBottom="4dp"
+            android:layout_marginBottom="2dp"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:rating="@{(float)review.rating}" />
 
         <TextView
             style="@style/messageText"
+            android:paddingBottom="4dp"
+            android:layout_marginBottom="2dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{review.message}" />
+            android:text="@{review.message}"
+            tools:text="This is long message" />
+
+
+        <TextView
+            style="@style/grayText"
+            android:paddingBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{review.author}"
+            tools:text="This is long message" />
 
         <View
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="2dp"
             android:layout_width="fill_parent"
-            android:layout_height="2dp"
-            android:background="#c0c0c0"/>
+            android:layout_height="1dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:background="#c0c0c0" />
 
     </LinearLayout>
 

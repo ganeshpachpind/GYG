@@ -39,4 +39,9 @@ public class ReviewListViewModel implements Observer<ReviewListResponse> {
     public void onNext(ReviewListResponse reviewListResponse) {
         reviewListView.updateReviewList(reviewListResponse);
     }
+
+    public void onAddReviewClicked(){
+        reviewListView.navigateToAddReview();
+
+    }
 }

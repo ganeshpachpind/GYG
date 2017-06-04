@@ -10,6 +10,7 @@ public class Review {
     private String message;
     private String author;
     private boolean foreignLanguage;
+    private String country;
 
     public Review() {
     }
@@ -60,5 +61,13 @@ public class Review {
 
     public void setForeignLanguage(boolean foreignLanguage) {
         this.foreignLanguage = foreignLanguage;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 }

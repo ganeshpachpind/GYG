@@ -12,4 +12,6 @@ public interface ReviewListView {
     void hideProgressBar();
 
     void showNetworkErrorMessage();
+
+    void navigateToAddReview();
 }

@@ -4,4 +4,13 @@
     <string name="please_wait">Please Wait while loading...</string>
     <string name="check_internet">Check Internet Connection</string>
     <string name="something_went_wrong">Something went wrong retry....</string>
+    <string name="title_activity_add_review">AddReviewActivity</string>
+    <string name="name">Name</string>
+    <string name="title">Title</string>
+    <string name="message">Review Message</string>
+    <string name="country">Country</string>
+    <string name="add_review">Add Review</string>
+    <string name="rating">Rating</string>
+    <string name="anything_else_to_say">Anything else you would like to say</string>
+    <string name="submit">Submit</string>
 </resources>

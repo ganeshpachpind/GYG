@@ -1,5 +1,6 @@
 package interview.gyg.activities;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -55,6 +56,7 @@ public class ReviewActivity extends AppCompatActivity implements ReviewListView 
         reviewList.setAdapter(new ReviewAdapter(new ArrayList<Review>()));
 
         reviewListViewModel.getReviewList(currentPageNumber);
+
     }
 
     @Override
@@ -85,5 +87,11 @@ public class ReviewActivity extends AppCompatActivity implements ReviewListView 
     @Override
     public void showErrorMessage() {
         Toast.makeText(this, R.string.something_went_wrong, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void navigateToAddReview() {
+        Intent addReviewActivity = new Intent(this, AddReviewActivity.class);
+        startActivity(addReviewActivity);
     }
 }

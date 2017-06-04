@@ -1,11 +1,9 @@
 package interview.gyg.activities;
 
 
-import java.util.List;
-
-import interview.gyg.model.Review;
+import interview.gyg.model.ReviewListResponse;
 
 public interface ReviewListView {
-    void setListAdapter(List<Review> reviews);
+    void updateReviewList(ReviewListResponse reviewListResponse);
     void setErrorMessage();
 }

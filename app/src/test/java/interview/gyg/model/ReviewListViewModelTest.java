@@ -32,9 +32,9 @@ public class ReviewListViewModelTest {
 
     @Test
     public void shouldFetchReviewListFromRepository() throws Exception {
-        reviewListViewModel.getReviewList();
+        reviewListViewModel.getReviewList(0);
 
-        verify(reviewRepository).getReviews(reviewListViewModel);
+        verify(reviewRepository).getReviews(0, reviewListViewModel);
     }
 
     @Test
@@ -45,9 +45,10 @@ public class ReviewListViewModelTest {
                 new Review(10, "", "message", "author", false)
         );
 
-        reviewListViewModel.onNext(new ReviewListResponse(true, 200, reviews));
+        ReviewListResponse reviewListResponse = new ReviewListResponse(true, 200, reviews);
+        reviewListViewModel.onNext(reviewListResponse);
 
-        verify(reviewListView).setListAdapter(reviews);
+        verify(reviewListView).updateReviewList(reviewListResponse);
     }
 
     @Test

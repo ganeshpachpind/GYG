@@ -57,11 +57,11 @@ public class ReviewRepositoryTest extends RxBaseTest {
 
     @Test
     public void shouldFetchAllReviewsFromServer() throws Exception {
-        when(reviewService.getReviewList()).thenReturn(Observable.just(reviewListResponse));
-        reviewRepository.getReviews(testSubscriber);
+        when(reviewService.getReviewList(0)).thenReturn(Observable.just(reviewListResponse));
+        reviewRepository.getReviews(0, testSubscriber);
 
         verify(restAPIFactory).getReviewService();
-        verify(reviewService).getReviewList();
+        verify(reviewService).getReviewList(0);
 
         testSubscriber.assertNoErrors();
         testSubscriber.assertCompleted();
@@ -70,8 +70,8 @@ public class ReviewRepositoryTest extends RxBaseTest {
 
     @Test
     public void shouldThrowErrorWhenFetchingReviewFromServerFailed() throws Exception {
-        when(reviewService.getReviewList()).thenReturn(Observable.<ReviewListResponse>error(new Exception()));
-        reviewRepository.getReviews(testSubscriber);
+        when(reviewService.getReviewList(0)).thenReturn(Observable.<ReviewListResponse>error(new Exception()));
+        reviewRepository.getReviews(0, testSubscriber);
 
         testSubscriber.assertError(Exception.class);
         testSubscriber.assertNoValues();

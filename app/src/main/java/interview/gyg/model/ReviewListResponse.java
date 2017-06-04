@@ -11,7 +11,7 @@ public class ReviewListResponse {
     @JsonProperty("status")
     private boolean status;
 
-    @JsonProperty("totalReviews")
+    @JsonProperty("total_reviews")
     private int totalReviews;
 
     @JsonProperty("data")

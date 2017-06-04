@@ -15,9 +15,9 @@ public class ReviewRepository {
         this.restAPIFactory = restAPIFactory;
     }
 
-    public void getReviews(Observer<ReviewListResponse> observer) {
+    public void getReviews(int pageNo, Observer<ReviewListResponse> observer) {
         restAPIFactory.getReviewService()
-                .getReviewList()
+                .getReviewList(pageNo)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);

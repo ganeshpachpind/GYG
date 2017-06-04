@@ -14,8 +14,8 @@ public class ReviewListViewModel implements Observer<ReviewListResponse> {
         this.reviewListView = reviewListView;
     }
 
-    public void getReviewList() {
-        reviewRepository.getReviews(this);
+    public void getReviewList(int pageNo) {
+        reviewRepository.getReviews(pageNo, this);
     }
 
     @Override
@@ -30,6 +30,6 @@ public class ReviewListViewModel implements Observer<ReviewListResponse> {
 
     @Override
     public void onNext(ReviewListResponse reviewListResponse) {
-        reviewListView.setListAdapter(reviewListResponse.getReviews());
+        reviewListView.updateReviewList(reviewListResponse);
     }
 }

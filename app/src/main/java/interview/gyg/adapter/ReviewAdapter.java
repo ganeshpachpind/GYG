@@ -1,4 +1,4 @@
-package interview.gyg.activities;
+package interview.gyg.adapter;
 
 
 import android.databinding.DataBindingUtil;
@@ -9,11 +9,10 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import interview.gyg.R;
-import interview.gyg.adapter.ReviewViewHolder;
 import interview.gyg.databinding.ReviewBinding;
 import interview.gyg.model.Review;
 
-class ReviewAdapter extends RecyclerView.Adapter<ReviewViewHolder> {
+public class ReviewAdapter extends RecyclerView.Adapter<ReviewViewHolder> {
     private List<Review> reviewList;
 
     public ReviewAdapter(List<Review> reviewList) {
@@ -35,5 +34,11 @@ class ReviewAdapter extends RecyclerView.Adapter<ReviewViewHolder> {
     @Override
     public int getItemCount() {
         return reviewList.size();
+    }
+
+    public void addAll(List<Review> reviews) {
+        for(Review review: reviews){
+            this.reviewList.add(review);
+        }
     }
 }

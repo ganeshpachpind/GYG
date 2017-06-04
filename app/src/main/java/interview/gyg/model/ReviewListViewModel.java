@@ -16,15 +16,17 @@ public class ReviewListViewModel implements Observer<ReviewListResponse> {
 
     public void getReviewList(int pageNo) {
         reviewRepository.getReviews(pageNo, this);
+        reviewListView.showProgressBar();
     }
 
     @Override
     public void onCompleted() {
-
+        reviewListView.hideProgressBar();
     }
 
     @Override
     public void onError(Throwable e) {
+        reviewListView.hideProgressBar();
         reviewListView.setErrorMessage();
     }
 

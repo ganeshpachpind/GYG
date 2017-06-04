@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">GYG</string>
+    <string name="loading">Loading</string>
+    <string name="please_wait">Please Wait while loading...</string>
 </resources>

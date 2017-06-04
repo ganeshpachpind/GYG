@@ -8,16 +8,25 @@
             type="interview.gyg.model.ReviewListViewModel" />
     </data>
 
-    <LinearLayout
+    <FrameLayout
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".activities.ReviewActivity">
 
-        <android.support.v7.widget.RecyclerView xmlns:tools="http://schemas.android.com/tools"
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/reviewList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context="interview.gyg.activities.ReviewActivity" />
-    </LinearLayout>
+            android:clipToPadding="false" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
 
 </layout>
 

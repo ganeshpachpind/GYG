@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 
@@ -22,6 +24,8 @@ public class ReviewActivity extends AppCompatActivity implements ReviewListView 
     private ActivityReviewBinding binding;
     private int currentPageNumber = 0;
     private int maxPages = 1;
+    private ProgressBar progressBar;
+    private boolean isLoading = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +35,7 @@ public class ReviewActivity extends AppCompatActivity implements ReviewListView 
         ReviewRepository reviewRepository = new ReviewRepository(new RestAPIFactory());
         final ReviewListViewModel reviewListViewModel = new ReviewListViewModel(reviewRepository, this);
         binding.setReviewListViewModel(reviewListViewModel);
-
+        progressBar = binding.progressBar;
         RecyclerView reviewList = binding.reviewList;
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -39,15 +43,16 @@ public class ReviewActivity extends AppCompatActivity implements ReviewListView 
         reviewList.addOnScrollListener(new PaginationScrollListener(layoutManager) {
             @Override
             public void loadNextPage() {
-                currentPageNumber++;
-                if (currentPageNumber <= maxPages) {
-                    reviewListViewModel.getReviewList(currentPageNumber);
+                if (!isLoading) {
+                    currentPageNumber++;
+                    if (currentPageNumber <= maxPages) {
+                        reviewListViewModel.getReviewList(currentPageNumber);
+                    }
                 }
             }
         });
         reviewList.setAdapter(new ReviewAdapter(new ArrayList<Review>()));
 
-        currentPageNumber = 0;
         reviewListViewModel.getReviewList(currentPageNumber);
     }
 
@@ -62,5 +67,17 @@ public class ReviewActivity extends AppCompatActivity implements ReviewListView 
     @Override
     public void setErrorMessage() {
 
+    }
+
+    @Override
+    public void showProgressBar() {
+        isLoading = true;
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgressBar() {
+        isLoading = false;
+        progressBar.setVisibility(View.GONE);
     }
 }

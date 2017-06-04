@@ -12,6 +12,8 @@ import java.util.List;
 import interview.gyg.activities.ReviewListView;
 import interview.gyg.repository.ReviewRepository;
 
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -49,6 +51,8 @@ public class ReviewListViewModelTest {
         reviewListViewModel.onNext(reviewListResponse);
 
         verify(reviewListView).updateReviewList(reviewListResponse);
+        verify(reviewListView, never()).hideProgressBar();
+        verify(reviewListView, never()).setErrorMessage();
     }
 
     @Test
@@ -57,5 +61,23 @@ public class ReviewListViewModelTest {
         reviewListViewModel.onError(new Exception());
 
         verify(reviewListView).setErrorMessage();
+        verify(reviewListView).hideProgressBar();
+        verify(reviewListView, never()).updateReviewList(any(ReviewListResponse.class));
+    }
+
+
+    @Test
+    public void shouldShowProgressDialogWhileFetchingReviewList() throws Exception {
+        reviewListViewModel.getReviewList(1);
+
+        verify(reviewListView).showProgressBar();
+    }
+
+    @Test
+    public void shouldHideProgressBarOnFetchReviewListCompleted() throws Exception {
+        reviewListViewModel.onCompleted();
+
+        verify(reviewListView).hideProgressBar();
+        verify(reviewListView, never()).setErrorMessage();
     }
 }

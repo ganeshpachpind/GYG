@@ -2,6 +2,8 @@ package interview.gyg.repository;
 
 
 import interview.gyg.api.RestAPIFactory;
+import interview.gyg.model.AddReviewRequest;
+import interview.gyg.model.Review;
 import interview.gyg.model.ReviewListResponse;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -23,4 +25,11 @@ public class ReviewRepository {
                 .subscribe(observer);
     }
 
+    public void saveReview(AddReviewRequest addReviewRequest, Observer<Review> callback) {
+        restAPIFactory.getReviewService()
+                .submitReview(addReviewRequest)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(callback);
+    }
 }

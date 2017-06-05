@@ -15,6 +15,7 @@ import java.util.List;
 import interview.gyg.api.RestAPIFactory;
 import interview.gyg.api.ReviewService;
 import interview.gyg.helper.RxBaseTest;
+import interview.gyg.model.AddReviewRequest;
 import interview.gyg.model.Review;
 import interview.gyg.model.ReviewListResponse;
 import rx.Observable;
@@ -38,7 +39,6 @@ public class ReviewRepositoryTest extends RxBaseTest {
 
     private ReviewRepository reviewRepository;
     private List<Review> reviewList;
-    private TestSubscriber<ReviewListResponse> testSubscriber;
     ReviewListResponse reviewListResponse;
 
     @Override
@@ -46,7 +46,6 @@ public class ReviewRepositoryTest extends RxBaseTest {
     public void setUp() throws Exception {
         super.setUp();
         reviewListResponse = new ReviewListResponse(true, 300, reviewList);
-        testSubscriber = TestSubscriber.create();
         when(restAPIFactory.getReviewService()).thenReturn(reviewService);
         reviewRepository = new ReviewRepository(restAPIFactory);
         reviewList = Arrays.asList(
@@ -57,6 +56,7 @@ public class ReviewRepositoryTest extends RxBaseTest {
 
     @Test
     public void shouldFetchAllReviewsFromServer() throws Exception {
+        TestSubscriber<ReviewListResponse> testSubscriber = TestSubscriber.create();
         when(reviewService.getReviewList(0)).thenReturn(Observable.just(reviewListResponse));
         reviewRepository.getReviews(0, testSubscriber);
 
@@ -70,12 +70,47 @@ public class ReviewRepositoryTest extends RxBaseTest {
 
     @Test
     public void shouldThrowErrorWhenFetchingReviewFromServerFailed() throws Exception {
+        TestSubscriber<ReviewListResponse> testSubscriber = TestSubscriber.create();
         when(reviewService.getReviewList(0)).thenReturn(Observable.<ReviewListResponse>error(new Exception()));
         reviewRepository.getReviews(0, testSubscriber);
 
         testSubscriber.assertError(Exception.class);
         testSubscriber.assertNoValues();
         testSubscriber.assertNotCompleted();
+
+    }
+
+    @Test
+    public void shouldSaveReviewToServer() throws Exception {
+        TestSubscriber<Review> saveSubscriber = TestSubscriber.create();
+        Review review = new Review();
+        AddReviewRequest addReviewRequest = new AddReviewRequest(1, review);
+        when(reviewService.submitReview(addReviewRequest)).thenReturn(Observable.just(review));
+
+        reviewRepository.saveReview(addReviewRequest, saveSubscriber);
+
+        verify(restAPIFactory).getReviewService();
+
+        saveSubscriber.assertNoErrors();
+        saveSubscriber.assertCompleted();
+        saveSubscriber.assertReceivedOnNext(Collections.singletonList(review));
+
+    }
+
+    @Test
+    public void shouldThrowErrorWhenSaveReviewToServerFails() throws Exception {
+        TestSubscriber<Review> saveSubscriber = TestSubscriber.create();
+        Review review = new Review();
+        AddReviewRequest addReviewRequest = new AddReviewRequest(1, review);
+        when(reviewService.submitReview(addReviewRequest)).thenReturn(Observable.<Review>error(new Exception()));
+
+        reviewRepository.saveReview(addReviewRequest, saveSubscriber);
+
+        verify(restAPIFactory).getReviewService();
+
+        saveSubscriber.assertNotCompleted();
+        saveSubscriber.assertNoValues();
+        saveSubscriber.assertNotCompleted();
 
     }
 }

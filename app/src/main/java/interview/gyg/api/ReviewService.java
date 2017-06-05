@@ -2,9 +2,8 @@ package interview.gyg.api;
 
 
 import interview.gyg.model.AddReviewRequest;
+import interview.gyg.model.Review;
 import interview.gyg.model.ReviewListResponse;
-import okhttp3.ResponseBody;
-import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -17,5 +16,5 @@ public interface ReviewService {
     Observable<ReviewListResponse> getReviewList(@Query("page") int page);
 
     @POST("review")
-    Observable<Response<ResponseBody>> submitReview(@Body AddReviewRequest addReviewRequest);
+    Observable<Review> submitReview(@Body AddReviewRequest addReviewRequest);
 }

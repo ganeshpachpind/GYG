@@ -12,6 +12,7 @@ import interview.gyg.api.RestAPIFactory;
 import interview.gyg.databinding.ActivityAddReviewBinding;
 import interview.gyg.model.AddReviewViewModel;
 import interview.gyg.model.Review;
+import interview.gyg.repository.ReviewRepository;
 
 public class AddReviewActivity extends AppCompatActivity implements AddReviewView {
 
@@ -23,7 +24,7 @@ public class AddReviewActivity extends AppCompatActivity implements AddReviewVie
         ActivityAddReviewBinding activityAddReviewBinding = DataBindingUtil.setContentView(this, R.layout.activity_add_review);
         RestAPIFactory restAPIFactory = new RestAPIFactory();
         Review review = new Review();
-        AddReviewViewModel addReviewViewModel = new AddReviewViewModel(review, restAPIFactory, this);
+        AddReviewViewModel addReviewViewModel = new AddReviewViewModel(review, this, new ReviewRepository(restAPIFactory));
         activityAddReviewBinding.setAddReviewViewModel(addReviewViewModel);
         progressBar = activityAddReviewBinding.progressBar;
     }

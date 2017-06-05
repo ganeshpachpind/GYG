@@ -11,7 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".views.ReviewActivity" android:label="Reviews">
+        <activity
+            android:name=".views.ReviewActivity"
+            android:label="Reviews"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +23,8 @@
         </activity>
         <activity
             android:name=".views.AddReviewActivity"
-            android:label="@string/title_activity_add_review"
+            android:label="@string/add_review"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

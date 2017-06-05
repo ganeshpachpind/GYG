@@ -24,7 +24,8 @@ public class AddReviewActivity extends AppCompatActivity implements AddReviewVie
         ActivityAddReviewBinding activityAddReviewBinding = DataBindingUtil.setContentView(this, R.layout.activity_add_review);
         RestAPIFactory restAPIFactory = new RestAPIFactory();
         Review review = new Review();
-        AddReviewViewModel addReviewViewModel = new AddReviewViewModel(review, this, new ReviewRepository(restAPIFactory));
+        ReviewRepository reviewRepository = new ReviewRepository(restAPIFactory);
+        AddReviewViewModel addReviewViewModel = new AddReviewViewModel(review, this, reviewRepository, 1);
         activityAddReviewBinding.setAddReviewViewModel(addReviewViewModel);
         progressBar = activityAddReviewBinding.progressBar;
     }

@@ -1,24 +1,28 @@
 package interview.gyg.model;
 
 
+import android.util.Log;
+
 import interview.gyg.activities.AddReviewView;
 import interview.gyg.repository.ReviewRepository;
 import retrofit2.HttpException;
 import rx.Observer;
 
 public class AddReviewViewModel implements Observer<Review> {
+    private static final String TAG = AddReviewViewModel.class.getSimpleName();
 
-
+    private int venueId;
     private Review review;
     private AddReviewView addReviewView;
     private ReviewRepository reviewRepository;
 
     public AddReviewViewModel(Review review,
                               AddReviewView addReviewView,
-                              ReviewRepository reviewRepository) {
+                              ReviewRepository reviewRepository, int venueId) {
         this.review = review;
         this.addReviewView = addReviewView;
         this.reviewRepository = reviewRepository;
+        this.venueId = venueId;
     }
 
     public Review getReview() {
@@ -31,7 +35,7 @@ public class AddReviewViewModel implements Observer<Review> {
 
     public void onSubmitReviewClicked() {
         addReviewView.showProgressBar();
-        AddReviewRequest addReviewRequest = new AddReviewRequest(1, review);
+        AddReviewRequest addReviewRequest = new AddReviewRequest(venueId, review);
         reviewRepository.saveReview(addReviewRequest, this);
     }
 
@@ -53,6 +57,6 @@ public class AddReviewViewModel implements Observer<Review> {
 
     @Override
     public void onNext(Review review) {
-        System.out.println("Review submitted is :" + review);
+        Log.i(TAG, "Review created" + review);
     }
 }

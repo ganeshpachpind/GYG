@@ -3,7 +3,7 @@ package interview.gyg.model;
 
 import android.util.Log;
 
-import interview.gyg.activities.AddReviewView;
+import interview.gyg.views.AddReviewView;
 import interview.gyg.repository.ReviewRepository;
 import retrofit2.HttpException;
 import rx.Observer;

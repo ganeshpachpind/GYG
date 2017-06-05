@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import interview.gyg.activities.AddReviewView;
+import interview.gyg.views.AddReviewView;
 import interview.gyg.repository.ReviewRepository;
 import retrofit2.HttpException;
 

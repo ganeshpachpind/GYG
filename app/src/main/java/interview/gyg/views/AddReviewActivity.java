@@ -1,4 +1,4 @@
-package interview.gyg.activities;
+package interview.gyg.views;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;

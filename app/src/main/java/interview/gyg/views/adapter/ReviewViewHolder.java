@@ -1,4 +1,4 @@
-package interview.gyg.adapter;
+package interview.gyg.views.adapter;
 
 
 import android.support.v7.widget.RecyclerView;

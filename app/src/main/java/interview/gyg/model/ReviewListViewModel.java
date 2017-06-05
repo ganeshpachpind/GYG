@@ -1,7 +1,7 @@
 package interview.gyg.model;
 
 
-import interview.gyg.activities.ReviewListView;
+import interview.gyg.views.ReviewListView;
 import interview.gyg.repository.ReviewRepository;
 import retrofit2.HttpException;
 import rx.Observer;

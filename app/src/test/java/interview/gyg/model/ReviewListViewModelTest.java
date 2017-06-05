@@ -9,7 +9,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.util.Arrays;
 import java.util.List;
 
-import interview.gyg.activities.ReviewListView;
+import interview.gyg.views.ReviewListView;
 import interview.gyg.repository.ReviewRepository;
 import retrofit2.HttpException;
 import static org.mockito.Matchers.any;

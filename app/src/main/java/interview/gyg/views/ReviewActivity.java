@@ -1,4 +1,4 @@
-package interview.gyg.activities;
+package interview.gyg.views;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -13,7 +13,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import interview.gyg.R;
-import interview.gyg.adapter.ReviewAdapter;
+import interview.gyg.views.adapter.ReviewAdapter;
 import interview.gyg.api.RestAPIFactory;
 import interview.gyg.databinding.ActivityReviewBinding;
 import interview.gyg.model.Review;

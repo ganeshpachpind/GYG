@@ -1,4 +1,4 @@
-package interview.gyg.activities;
+package interview.gyg.views;
 
 
 import interview.gyg.model.ReviewListResponse;

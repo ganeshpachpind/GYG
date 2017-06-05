@@ -7,4 +7,4 @@
 
 
 # Test Report
-![alt text](https://drive.google.com/open?id=0Byy5_Lnr-JiEV3dIX2Q2T3RqcGc)
+![alt text](https://raw.githubusercontent.com/ganeshpachpind/GYG/master/other/test_report.png)
